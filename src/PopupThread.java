@@ -1,3 +1,7 @@
+/*
+ * Supposed to be a side character who gives the warnings when things speed up/garbage coming
+ * Thinking to add the timer triggers here or it can be another class and this alone deals with messages
+ */
 import javax.swing.*;
 import java.awt.*;
 
