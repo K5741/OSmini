@@ -15,3 +15,20 @@ The core gameplay revolves around traditional Tetris mechanics: rotating, moving
 The player advances with the time. The match lasts 5 minutes, and each minute introduces a condition that either speeds up the game or adds garbage to the game board.
 ## Win/Loss Conditions: What determines success or failure?
 The player wins if they can survive the full 5-minute round without the blocks reaching the top of the game board. The final score is determined by how many lines the player clears and how clean the board is at the end. A 1-3 star rating system will be used, with more stars awarded for fewer leftover blocks.
+
+# Breakdown of OS Concepts Used
+*Note - The OS concepts will be updated to represent a lower level than what is currently written*
+## Process Creation
+PopupThread extends Thread for a character to popup and display warning messages to the player
+
+![image](https://github.com/user-attachments/assets/343b6627-ce7d-46e5-96a8-2880c31715ac)
+![image](https://github.com/user-attachments/assets/ceed9bec-2755-4b9a-95ce-dd44f686edbb)
+## Threading
+Manages the popup character independently from the main UI/game logic.
+Threads for game logic, popup, music, etc.
+
+![image](https://github.com/user-attachments/assets/1c328b57-b1d4-444a-ba05-2738d7e24229)
+## Signal Handling/Timers
+Buttons like Start, Pause, and Exit use listeners to interact with the game state
+
+![image](https://github.com/user-attachments/assets/6965062c-f877-4cb5-8c62-eea39742d6e3)
