@@ -33,9 +33,9 @@ Buttons like Start, Pause, and Exit use listeners to interact with the game stat
 
 ![image](https://github.com/user-attachments/assets/6965062c-f877-4cb5-8c62-eea39742d6e3)
 ## Synchronization
-will update today
+The synchronized block makes sure no thread modifies a shared variable or UI component while another thread is using it
 
-
+![image](https://github.com/user-attachments/assets/ef5aeb69-dddb-406a-a8d0-f7c7f304247f)
 ## File/Memory Management
 will update today
 
