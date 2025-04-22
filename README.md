@@ -32,3 +32,11 @@ Threads for game logic, popup, music, etc.
 Buttons like Start, Pause, and Exit use listeners to interact with the game state
 
 ![image](https://github.com/user-attachments/assets/6965062c-f877-4cb5-8c62-eea39742d6e3)
+## Synchronization
+will update today
+
+
+## File/Memory Management
+will update today
+
+
