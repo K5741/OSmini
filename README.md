@@ -1,3 +1,5 @@
+# Demo
+https://youtu.be/PCb4pU3VA5o
 # Set-Up & How To Start Playing
 Download the src folder, as it contains the main program file and all necessary classes. To run the program, open and execute the main file. Currently, the game will only display the side character and its warning messages. The Tetris game board is a work in progress and not yet integrated into the main program. For now, the board exists as a preview within the GameWindow class, primarily for testing and design purposes.
 
@@ -37,6 +39,7 @@ The synchronized block makes sure no thread modifies a shared variable or UI com
 
 ![image](https://github.com/user-attachments/assets/ef5aeb69-dddb-406a-a8d0-f7c7f304247f)
 ## File/Memory Management
-will update today
+Saving the scores and for now using a dummy number
 
+![image](https://github.com/user-attachments/assets/18d7d23d-7a4f-4bea-8e27-082fcf647a09)
 
