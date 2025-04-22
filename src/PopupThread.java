@@ -55,7 +55,6 @@ public class PopupThread extends Thread {
                 e.printStackTrace();
             }
         }
-S
         popup.dispose(); 
     }
 }
