@@ -45,7 +45,9 @@ public class PopupThread extends Thread {
         popup.setVisible(true);
 
         for (String msg : messages) {
-            messageLabel.setText(msg);
+            synchronized (this) {
+                messageLabel.setText(msg);
+            }    
             try {
                 // Appears for 5 secs
                 Thread.sleep(5000);
@@ -53,7 +55,7 @@ public class PopupThread extends Thread {
                 e.printStackTrace();
             }
         }
-
+S
         popup.dispose(); 
     }
 }
