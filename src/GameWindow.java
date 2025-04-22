@@ -5,6 +5,9 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class GameWindow extends JPanel {
     private GameBoard gameBoard; // Custom panel you'll define
@@ -28,7 +31,16 @@ public class GameWindow extends JPanel {
 
         start.addActionListener(e -> gameBoard.startGame());
         pause.addActionListener(e -> gameBoard.pauseGame());
-        exit.addActionListener(e -> System.exit(0));
+        exit.addActionListener(e -> {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("scores.txt", true))) {
+                writer.write("Score: " + (int)(Math.random() * 1000));
+                writer.newLine();
+            }    
+            catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            System.exit(0);
+        });
 
         add(start);
         add(pause);
