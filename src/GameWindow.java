@@ -179,6 +179,8 @@ public class GameWindow extends JPanel {
                     case KeyEvent.VK_UP -> currentPiece.rotate();
                 }
                 repaint();
+                // Debugging keyboard movements
+                // System.out.println("Key pressed: " + e.getKeyCode());
             }
         });
     }
@@ -196,6 +198,8 @@ public class GameWindow extends JPanel {
         });
         fallTimer.start();
         repaint();
+        // Reads keyboard arrows
+        this.grabFocus();
     }
     
     public void pauseGame() {
@@ -225,5 +229,11 @@ public class GameWindow extends JPanel {
                 }
             }
         }
+    }
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        requestFocusInWindow();
     }
 }

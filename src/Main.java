@@ -16,6 +16,7 @@ public class Main {
             frame.setResizable(false);
             frame.add(game);
             frame.setVisible(true);
+            game.requestFocusInWindow();
         });
 
         PopupThread spawn = new PopupThread();
