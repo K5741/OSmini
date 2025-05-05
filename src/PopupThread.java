@@ -4,6 +4,7 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.io.PipedOutputStream;
 
 public class PopupThread extends Thread {
     private final String[] messages = {
@@ -13,14 +14,19 @@ public class PopupThread extends Thread {
         "Time to speed things up! ༽◺_◿༼)"
     };
 
+    private PipedOutputStream pipeOut;
     private JFrame popup;
     private JLabel characterImage;
     private JLabel messageLabel;
 
+    public PopupThread(PipedOutputStream pipeOut) {
+        this.pipeOut = pipeOut;
+    }
+
     public void run() {
         popup = new JFrame("Warning Msgs");
         popup.setSize(250, 150);
-        popup.setLocation(20, 50);
+        popup.setLocation(80, 50);
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         popup.setUndecorated(true);
         popup.setAlwaysOnTop(true);
@@ -43,28 +49,27 @@ public class PopupThread extends Thread {
 
         popup.add(panel);
 
-        for (String msg : messages) {
-            // synchronized (this) {
-              //  messageLabel.setText(msg);
-            // }    
+        for (int i = 0; i < messages.length; i++) {
+            final int index = i;
             try {
-                // After a minute
+                // Show msg each minute
                 Thread.sleep(60000);
-            } catch (InterruptedException e) {
+                pipeOut.write(("SHOW\n").getBytes());
+                pipeOut.write(("MODE" + i + "\n").getBytes());
+
+                SwingUtilities.invokeLater(() -> {
+                    messageLabel.setText(messages[index]);
+                    popup.setVisible(true);
+                });
+                // Show msg for 3 secs
+                Thread.sleep(3000);
+
+                SwingUtilities.invokeLater(() -> popup.setVisible(false));
+                pipeOut.write(("HIDE\n").getBytes());
+
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
-            messageLabel.setText(msg);
-            popup.setVisible(true);
-
-            try {
-                // Showing msg for 5 secs
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            // Hide popup after showing
-            popup.setVisible(false); 
         }
         popup.dispose();
     }

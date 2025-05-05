@@ -5,21 +5,37 @@
 import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.PipedInputStream;
+import java.io.PipedOutputStream;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Blah Tetris");
-            GameWindow game = new GameWindow();
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(1300, 800);
-            frame.setResizable(false);
-            frame.add(game);
-            frame.setVisible(true);
-            game.requestFocusInWindow();
-        });
+            try {
+                // Create pipe for communication
+                PipedOutputStream pipeOut = new PipedOutputStream();
+                PipedInputStream pipeIn = new PipedInputStream(pipeOut);
 
-        PopupThread spawn = new PopupThread();
-        spawn.start();
+                // Create game window and popup thread using the pipe
+                GameWindow gameWindow = new GameWindow(pipeIn);
+                PopupThread popupThread = new PopupThread(pipeOut);
+
+                // Game Window Setup
+                JFrame frame = new JFrame("Blah Tetris");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.setSize(405, 800);
+                frame.setResizable(false);
+                frame.add(gameWindow);
+                frame.setVisible(true);
+                gameWindow.requestFocusInWindow();
+
+                // Start the popup thread
+                popupThread.start();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }

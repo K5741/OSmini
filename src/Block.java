@@ -40,10 +40,10 @@ public class Block {
     public int getY() {
         return y;
     }
-
+    
     // Helper method to enforce boundary rules
     private boolean isInAccessibleArea(int x, int y) {
-        return x >= 3 && x <= 39 && y >= 0 && y < 22;
+        return x >= 2 && x <= 10 && y >= 0 && y < 23;
     }
 
     private boolean canMove(int dx, int dy) {

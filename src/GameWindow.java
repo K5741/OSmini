@@ -5,17 +5,22 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PipedInputStream;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GameWindow extends JPanel {
+    private BufferedReader pipeReader;
+    private Timer pipeReaderTimer;
     private Timer fallTimer;
     private Block currentPiece;
-    private final int rows = 22;
-    private final int cols = 43;
+    private final int rows = 23;
+    private final int cols = 13;
     private int[][] board = new int[rows][cols];
     // The block shapes
     private final int[][][][] blocks = {
@@ -138,7 +143,7 @@ public class GameWindow extends JPanel {
         }
     };
 
-    public GameWindow() {
+    public GameWindow(PipedInputStream pipeIn) {
         setLayout(null); // Using absolute positioning
         setBackground(Color.LIGHT_GRAY);
         setFocusable(true);
@@ -148,9 +153,9 @@ public class GameWindow extends JPanel {
         JButton pause = new JButton("Pause");
         JButton exit = new JButton("Exit");
 
-        start.setBounds(1200, 700, 70, 40);
-        pause.setBounds(1127, 700, 70, 40);
-        exit.setBounds(1054, 700, 70, 40);
+        start.setBounds(250, 705, 70, 40);
+        pause.setBounds(150, 705, 70, 40);
+        exit.setBounds(50, 705, 70, 40);
 
         add(start);
         add(pause);
@@ -185,6 +190,8 @@ public class GameWindow extends JPanel {
                 // System.out.println("Key pressed: " + e.getKeyCode());
             }
         });
+        pipeReader = new BufferedReader(new InputStreamReader(pipeIn));
+        startListeningToPipe();
     }
 
     public void startGame() {
@@ -204,6 +211,7 @@ public class GameWindow extends JPanel {
         });
         fallTimer.start();
         repaint();
+        startListeningToPipe();  
         // Reads keyboard arrows
         this.grabFocus();
     }
@@ -247,11 +255,11 @@ public class GameWindow extends JPanel {
                 }
             }
         }
-        /*
+        /* 
         // To view board uncomment
-         int cellSize = 30;
-        int rows = 22;
-        int cols = 43;
+        int cellSize = 30;
+        int rows = 23;
+        int cols = 13;
 
         // Optional: Fill background
         g.setColor(Color.BLACK);
@@ -269,7 +277,7 @@ public class GameWindow extends JPanel {
         for (int i = 0; i <= rows; i++) {
             g.drawLine(0, i * cellSize, cols * cellSize, i * cellSize);
         }
-         */
+     */    
     }
 
     @Override
@@ -318,4 +326,38 @@ public class GameWindow extends JPanel {
         int[][][] shape = blocks[index];
         return new Block(shape, 4, 0);
     }    
+
+    private void startListeningToPipe() {
+        pipeReaderTimer = new Timer(500, e -> {
+            try {
+                while (pipeReader.ready()) {
+                    String line = pipeReader.readLine();
+                    if (line != null) handlePipeMessage(line);
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        });
+        pipeReaderTimer.start();
+    }
+
+    private void handlePipeMessage(String msg) {
+        switch (msg) {
+            case "SHOW":
+                pauseGame();
+                setBackground(Color.RED);
+                break;
+            case "HIDE":
+                fallTimer.start();
+                setBackground(Color.LIGHT_GRAY);
+                break;
+            default:
+                if (msg.startsWith("MODE")) {
+                    int mode = Integer.parseInt(msg.substring(4));
+                    System.out.println("Popup mode: " + mode);
+                    // Example: speed up blocks temporarily
+                    if (mode == 0 && fallTimer != null) fallTimer.setDelay(200);
+                }
+        }
+    }
 }
