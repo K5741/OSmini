@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 public class Main {
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            JFrame frame = new JFrame("Tetris");
+            JFrame frame = new JFrame("Blah Tetris");
             GameWindow game = new GameWindow();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setSize(1300, 800);
