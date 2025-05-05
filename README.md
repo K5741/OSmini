@@ -1,5 +1,6 @@
 # Demo
-https://youtu.be/PCb4pU3VA5o
+Inputting later
+
 # Set-Up & How To Start Playing
 Download the src folder, as it contains the main program file and all necessary classes. To run the program, open and execute the main file. Press the Start button and the first block will begin falling from the top of the board. 
 
@@ -74,9 +75,8 @@ Game logic timer and thread priorities
 ![image](https://github.com/user-attachments/assets/1788eecb-4a13-4cbe-940a-f52201fc0685)
 
 ## Synchronization
-The synchronized block makes sure no thread modifies a shared variable or UI component while another thread is using it
+N/A
 
-![image](https://github.com/user-attachments/assets/ef5aeb69-dddb-406a-a8d0-f7c7f304247f)
 ## File/Memory Management
 Saving the scores and for now using a dummy number
 
