@@ -7,10 +7,10 @@ import java.awt.*;
 
 public class PopupThread extends Thread {
     private final String[] messages = {
-        "Speeding up soon!🤯",
+        "Speeding up soon! =͟͟͞͞( •̀д•́)))",
         "Do you smell that..?",
         "Dumping On You Soon...💩",
-        "Time to speed things up!🚨"
+        "Time to speed things up! ༽◺_◿༼)"
     };
 
     private JFrame popup;
@@ -42,19 +42,30 @@ public class PopupThread extends Thread {
         panel.add(messageLabel);
 
         popup.add(panel);
-        popup.setVisible(true);
 
         for (String msg : messages) {
-            synchronized (this) {
-                messageLabel.setText(msg);
-            }    
+            // synchronized (this) {
+              //  messageLabel.setText(msg);
+            // }    
             try {
-                // Appears for 5 secs
+                // After a minute
+                Thread.sleep(60000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            messageLabel.setText(msg);
+            popup.setVisible(true);
+
+            try {
+                // Showing msg for 5 secs
                 Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+            // Hide popup after showing
+            popup.setVisible(false); 
         }
-        popup.dispose(); 
+        popup.dispose();
     }
 }
