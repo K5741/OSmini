@@ -14,7 +14,9 @@ import java.awt.event.KeyEvent;
 public class GameWindow extends JPanel {
     private Timer fallTimer;
     private Block currentPiece;
-
+    private final int rows = 22;
+    private final int cols = 43;
+    private int[][] board = new int[rows][cols];
     // The block shapes
     private final int[][][][] blocks = {
         // I
@@ -146,9 +148,9 @@ public class GameWindow extends JPanel {
         JButton pause = new JButton("Pause");
         JButton exit = new JButton("Exit");
 
-        start.setBounds(900, 680, 70, 40);
-        pause.setBounds(830, 680, 70, 40);
-        exit.setBounds(770, 680, 70, 40);
+        start.setBounds(1200, 700, 70, 40);
+        pause.setBounds(1127, 700, 70, 40);
+        exit.setBounds(1054, 700, 70, 40);
 
         add(start);
         add(pause);
@@ -191,10 +193,14 @@ public class GameWindow extends JPanel {
         currentPiece = new Block(shape, 4, 0);
         repaint();
         fallTimer = new Timer(500, e -> {
-            if (currentPiece != null) {
+            if (canMoveDown(currentPiece)) {
                 currentPiece.moveDown();
-                repaint();
+            } 
+            else {
+                lockBlock(currentPiece);
+                currentPiece = generateNewBlock();
             }
+            repaint();
         });
         fallTimer.start();
         repaint();
@@ -229,6 +235,41 @@ public class GameWindow extends JPanel {
                 }
             }
         }
+        // Draw locked blocks
+        int blockSize = 30;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                if (board[row][col] != 0) {
+                    g.setColor(Color.GREEN);
+                    g.fillRect(col * blockSize, row * blockSize, blockSize, blockSize);
+                    g.setColor(Color.BLACK);
+                    g.drawRect(col * blockSize, row * blockSize, blockSize, blockSize);
+                }
+            }
+        }
+        /*
+        // To view board uncomment
+         int cellSize = 30;
+        int rows = 22;
+        int cols = 43;
+
+        // Optional: Fill background
+        g.setColor(Color.BLACK);
+        g.fillRect(0, 0, cols * cellSize, rows * cellSize);
+
+        // Set grid line color
+        g.setColor(Color.DARK_GRAY);  // You can change this
+
+        // Draw vertical lines
+        for (int i = 0; i <= cols; i++) {
+            g.drawLine(i * cellSize, 0, i * cellSize, rows * cellSize);
+        }
+
+        // Draw horizontal lines
+        for (int i = 0; i <= rows; i++) {
+            g.drawLine(0, i * cellSize, cols * cellSize, i * cellSize);
+        }
+         */
     }
 
     @Override
@@ -236,4 +277,45 @@ public class GameWindow extends JPanel {
         super.addNotify();
         requestFocusInWindow();
     }
+
+    private boolean canMoveDown(Block block) {
+        int[][] shape = block.getCurrentShape();
+        int x = block.getX();
+        int y = block.getY();
+    
+        for (int i = 0; i < shape.length; i++) {
+            for (int j = 0; j < shape[i].length; j++) {
+                if (shape[i][j] == 1) {
+                    int newY = y + i + 1;
+                    int newX = x + j;
+    
+                    // Check bounds and if cell is filled
+                    if (newY >= rows || newX < 0 || newX >= cols || board[newY][newX] != 0) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    
+    private void lockBlock(Block block) {
+        int[][] shape = block.getCurrentShape();
+        int x = block.getX();
+        int y = block.getY();
+    
+        for (int i = 0; i < shape.length; i++) {
+            for (int j = 0; j < shape[i].length; j++) {
+                if (shape[i][j] == 1) {
+                    board[y + i][x + j] = 1;
+                }
+            }
+        }
+    }
+    
+    private Block generateNewBlock() {
+        int index = (int)(Math.random() * blocks.length);
+        int[][][] shape = blocks[index];
+        return new Block(shape, 4, 0);
+    }    
 }

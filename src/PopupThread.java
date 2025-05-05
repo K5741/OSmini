@@ -20,7 +20,7 @@ public class PopupThread extends Thread {
     public void run() {
         popup = new JFrame("Warning Msgs");
         popup.setSize(250, 150);
-        popup.setLocation(800, 100);
+        popup.setLocation(20, 50);
         popup.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         popup.setUndecorated(true);
         popup.setAlwaysOnTop(true);
