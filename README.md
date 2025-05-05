@@ -23,6 +23,17 @@ The player’s main objective remains classic to Tetris: rotate and position fal
 # Gameplay Mechanics
 ## Controls:
 The game will primarily use keyboard inputs. Arrow keys will control the movement and rotation of falling blocks, just like in traditional Tetris.
+
+Use the arrow keys to control the block:
+
+  Left Arrow (←): Move the block left.
+  
+  Right Arrow (→): Move the block right.
+  
+  Down Arrow (↓): Move the block down faster.
+  
+  Up Arrow (↑) (if applicable): Rotate the block.
+  
 ## Core Mechanics:
 The core gameplay revolves around traditional Tetris mechanics: rotating, moving, and placing falling blocks to clear horizontal lines. Added to this is a dynamic side-character system that gives real-time warnings. This adds a second layer of interaction beyond the standard puzzle gameplay, blending strategy with quick reflexes.
 ## How the player advances:
@@ -31,21 +42,37 @@ The player advances with the time. The match lasts 5 minutes. Survive!
 The player wins if they can survive the full 5-minute round without the blocks reaching the top of the game board. The final score is determined by how many lines the player clears and how clean the board is at the end. A 1-3 star rating system will be used, with more stars awarded for fewer leftover blocks.
 
 # Breakdown of OS Concepts Used
-*Note - The OS concepts will be updated to represent a lower level than what is currently written*
 ## Process Creation
 PopupThread extends Thread for a character to popup and display warning messages to the player
 
 ![image](https://github.com/user-attachments/assets/343b6627-ce7d-46e5-96a8-2880c31715ac)
 ![image](https://github.com/user-attachments/assets/a9d0f174-297e-400f-83d0-1c271e6a3104)
+## Inter-Process Communication
+A form of inter-thread communication simulating a pipe, typically used in inter-process communication.
+
+![image](https://github.com/user-attachments/assets/a31c3669-217c-4781-a57f-2ae674706e2c)
+![image](https://github.com/user-attachments/assets/3487eb2a-109e-472c-b601-405062115312)
+![image](https://github.com/user-attachments/assets/e3ee576e-82ed-4c6a-9a70-1bab703d311b)
+
 ## Threading
 Manages the popup character independently from the main UI/game logic.
-Threads for game logic, popup, music, etc.
+Threads for game logic qnd popup character
 
-![image](https://github.com/user-attachments/assets/1c328b57-b1d4-444a-ba05-2738d7e24229)
+![image](https://github.com/user-attachments/assets/5a5c7170-2d9a-4613-9ae4-ae921fea24ce)
+![image](https://github.com/user-attachments/assets/c7d8ce2a-bcf5-4f4b-ab23-bac8223def91)
+
 ## Signal Handling/Timers
-Buttons like Start, Pause, and Exit use listeners to interact with the game state
+Buttons like Start, Pause, and Exit use listeners to interact with the game state and the thread with timing
 
 ![image](https://github.com/user-attachments/assets/6965062c-f877-4cb5-8c62-eea39742d6e3)
+![image](https://github.com/user-attachments/assets/1788eecb-4a13-4cbe-940a-f52201fc0685)
+
+## Scheduling
+Game logic timer and thread priorities
+
+![image](https://github.com/user-attachments/assets/c7d8ce2a-bcf5-4f4b-ab23-bac8223def91)
+![image](https://github.com/user-attachments/assets/1788eecb-4a13-4cbe-940a-f52201fc0685)
+
 ## Synchronization
 The synchronized block makes sure no thread modifies a shared variable or UI component while another thread is using it
 
