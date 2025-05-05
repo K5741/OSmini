@@ -36,7 +36,7 @@ The player wins if they can survive the full 5-minute round without the blocks r
 PopupThread extends Thread for a character to popup and display warning messages to the player
 
 ![image](https://github.com/user-attachments/assets/343b6627-ce7d-46e5-96a8-2880c31715ac)
-![image](https://github.com/user-attachments/assets/ceed9bec-2755-4b9a-95ce-dd44f686edbb)
+![image](https://github.com/user-attachments/assets/a9d0f174-297e-400f-83d0-1c271e6a3104)
 ## Threading
 Manages the popup character independently from the main UI/game logic.
 Threads for game logic, popup, music, etc.
