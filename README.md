@@ -2,11 +2,17 @@
 https://youtu.be/PCb4pU3VA5o
 # Set-Up & How To Start Playing
 Download the src folder, as it contains the main program file and all necessary classes. To run the program, open and execute the main file. Press the Start button and the first block will begin falling from the top of the board. 
+
 Use the arrow keys to control the block:
+
   Left Arrow (←): Move the block left.
+  
   Right Arrow (→): Move the block right.
+  
   Down Arrow (↓): Move the block down faster.
+  
   Up Arrow (↑) (if applicable): Rotate the block.
+  
 Then when the block reaches the bottom of the board or lands on top of another block, it locks in place. Next, a new block will appear and begin falling. As time passes, unexpected events may occur or new callenges may appear based on a timer. 
 
 # About The Game
