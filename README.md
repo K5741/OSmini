@@ -74,9 +74,6 @@ Game logic timer and thread priorities
 ![image](https://github.com/user-attachments/assets/c7d8ce2a-bcf5-4f4b-ab23-bac8223def91)
 ![image](https://github.com/user-attachments/assets/1788eecb-4a13-4cbe-940a-f52201fc0685)
 
-## Synchronization
-N/A
-
 ## File/Memory Management
 Saving the scores and for now using a dummy number
 
