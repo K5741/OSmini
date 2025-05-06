@@ -81,4 +81,4 @@ Saving the scores and for now using a dummy number
 ## Built With
 - Java 17
 - Java Swing
-- IntelliJ IDEA (recommended for running)
+- Visual Studio Code and IntelliJ IDEA (recommended for running)
