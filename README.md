@@ -14,12 +14,12 @@ Use the arrow keys to control the block:
   
   Up Arrow (↑) (if applicable): Rotate the block.
   
-Then when the block reaches the bottom of the board or lands on top of another block, it locks in place. Next, a new block will appear and begin falling. As time passes, unexpected events may occur or new callenges may appear based on a timer. 
+Then when the block reaches the bottom of the board or lands on top of another block, it locks in place. Next, a new block will appear and begin falling. As time passes, unexpected events may occur or new challenges may appear based on a timer. 
 
 # About The Game
 Blah Tetris is a fast-paced twist on the classic Tetris experience. While players try to stack and clear blocks as usual, a pop-up side character will be displayed on the screen. This character issues real-time warnings about upcoming speed increases and surprise obstacles. Players must respond quickly to maintain control of their game space. It's Tetris, but with chaos–and a little personality.
 ## Core Gameplay Loop: Brief explanation of main player actions and feedback loops:
-The player’s main objective remains classic to Tetris: rotate and position falling blocks to complete lines and try to keep the blocks to a minimum and not lose by having them overflow. The additional challenge is picking up the speed the player.Throughout the match, the side character gives alerts when gameplay speeds. The game ends after 5 minutes, with the final score calculated based on blocks cleared and how full the board is, awarding 1 to 3 stars.
+The player’s main objective remains classic to Tetris: rotate and position falling blocks to complete lines and try to keep the blocks to a minimum and not lose by having them overflow. The additional challenge is managing the increasing game speed as time progresses.Throughout the match, the side character gives alerts when gameplay speeds. The game ends after 5 minutes, with the final score calculated based on blocks cleared and how full the board is, awarding 1 to 3 stars.
 
 # Gameplay Mechanics
 ## Controls:
@@ -49,7 +49,7 @@ PopupThread extends Thread for a character to popup and display warning messages
 ![image](https://github.com/user-attachments/assets/343b6627-ce7d-46e5-96a8-2880c31715ac)
 ![image](https://github.com/user-attachments/assets/a9d0f174-297e-400f-83d0-1c271e6a3104)
 ## Inter-Process Communication
-A form of inter-thread communication simulating a pipe, typically used in inter-process communication.
+The game simulates inter-process communication using PipedInputStream and PipedOutputStream for thread-to-thread messaging.
 
 ![image](https://github.com/user-attachments/assets/a31c3669-217c-4781-a57f-2ae674706e2c)
 ![image](https://github.com/user-attachments/assets/3487eb2a-109e-472c-b601-405062115312)
@@ -57,13 +57,13 @@ A form of inter-thread communication simulating a pipe, typically used in inter-
 
 ## Threading
 Manages the popup character independently from the main UI/game logic.
-Threads for game logic qnd popup character
+Threads for game logic and popup character
 
 ![image](https://github.com/user-attachments/assets/5a5c7170-2d9a-4613-9ae4-ae921fea24ce)
 ![image](https://github.com/user-attachments/assets/c7d8ce2a-bcf5-4f4b-ab23-bac8223def91)
 
 ## Signal Handling/Timers
-Buttons like Start, Pause, and Exit use listeners to interact with the game state and the thread with timing
+Event listeners on buttons like Start, Pause, and Exit control the game’s state and timers, simulating signal handling.
 
 ![image](https://github.com/user-attachments/assets/6965062c-f877-4cb5-8c62-eea39742d6e3)
 ![image](https://github.com/user-attachments/assets/1788eecb-4a13-4cbe-940a-f52201fc0685)
@@ -82,3 +82,7 @@ Saving the scores and for now using a dummy number
 
 ![image](https://github.com/user-attachments/assets/18d7d23d-7a4f-4bea-8e27-082fcf647a09)
 
+## Built With
+- Java 17
+- Java Swing
+- IntelliJ IDEA (recommended for running)
