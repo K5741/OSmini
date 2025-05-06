@@ -1,6 +1,5 @@
 # Demo
-Inputting later
-
+https://youtube.com/shorts/wUYwps4PI1o?feature=share
 # Set-Up & How To Start Playing
 Download the src folder, as it contains the main program file and all necessary classes. To run the program, open and execute the main file. Press the Start button and the first block will begin falling from the top of the board. 
 
